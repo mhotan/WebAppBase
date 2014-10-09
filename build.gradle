@@ -1,0 +1,44 @@
+// Apply the required plugins for this project
+apply plugin: 'java' // Annotates standard java application
+apply plugin: 'eclipse' // Generate files to work with Eclipse
+apply plugin: 'idea' // Generate files to work with Intellij
+apply plugin: 'spring-boot' // Spring Boot Server Application
+
+version = '1.0'
+
+// Define where to find the build scripts.
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.7.RELEASE")
+    }
+}
+
+// Define the name of the Jar and Version.
+jar {
+    baseName = 'resume-app-boot'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // tag::jetty[]
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-jetty"
+    }
+    compile("org.springframework.boot:spring-boot-starter-tomcat")
+    // end::jetty[]
+    // tag::actuator[]
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    // end::actuator[]
+    testCompile("junit:junit")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+}
