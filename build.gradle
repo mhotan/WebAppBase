@@ -18,7 +18,7 @@ buildscript {
 
 // Define the name of the Jar and Version.
 jar {
-    baseName = 'resume-app-boot'
+    baseName = 'web-app-base'
     version =  '0.1.0'
 }
 
